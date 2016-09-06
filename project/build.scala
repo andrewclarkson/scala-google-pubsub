@@ -2,6 +2,11 @@ import sbt._
 import Keys._
 
 
+object Versions {
+  val akka = "2.4.9"
+}
+
+
 object build extends Build {
 
   val baseSettings = Seq(
@@ -12,10 +17,22 @@ object build extends Build {
     )
   )
 
+  val akka = Seq(
+    libraryDependencies ++= Seq(
+      "com.typesafe.akka" %% "akka-actor" % Versions.akka
+    )
+  )
+
   lazy val pubsub = Project(
     id = "pubsub-core",
     base = file("core"),
     settings = baseSettings
   )
+
+  lazy val pubsubAkka = Project(
+    id = "pubsub-akka",
+    base = file("akka"),
+    settings = baseSettings ++ akka
+  ) dependsOn(pubsub)
 
 }
