@@ -33,6 +33,6 @@ object build extends Build {
     id = "pubsub-akka",
     base = file("akka"),
     settings = baseSettings ++ akka
-  ) dependsOn(pubsub)
+  ) dependsOn pubsub
 
 }
